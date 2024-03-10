@@ -85,14 +85,14 @@ public class MainActivity2 extends AppCompatActivity {
     }
 
     private boolean checkForWin() {
-        return checkRowsForWin() || checkColumnsForWin() || checkDiagonalsForWin() || checkForDraw();
+        return checkRowsForWin() || checkColumnsForWin() || checkDiagonalsForWin();
     }
 
     private boolean checkRowsForWin() {
         for (int i = 0; i < ROW_INDEX_TAG; i++) {
-            if (buttons[i][0].getText().equals(buttons[i][1].getText()) &&
-                    buttons[i][0].getText().equals(buttons[i][2].getText()) &&
-                    !buttons[i][0].getText().toString().isEmpty()) {
+            if (!buttons[i][0].getText().toString().isEmpty() &&
+                    buttons[i][0].getText().equals(buttons[i][1].getText()) &&
+                    buttons[i][0].getText().equals(buttons[i][2].getText())) {
                 return true;
             }
         }
@@ -101,9 +101,9 @@ public class MainActivity2 extends AppCompatActivity {
 
     private boolean checkColumnsForWin() {
         for (int j = 0; j < COLUMN_INDEX_TAG; j++) {
-            if (buttons[0][j].getText().equals(buttons[1][j].getText()) &&
-                    buttons[0][j].getText().equals(buttons[2][j].getText()) &&
-                    !buttons[0][j].getText().toString().isEmpty()) {
+            if (!buttons[0][j].getText().toString().isEmpty() &&
+                    buttons[0][j].getText().equals(buttons[1][j].getText()) &&
+                    buttons[0][j].getText().equals(buttons[2][j].getText())) {
                 return true;
             }
         }
@@ -111,14 +111,14 @@ public class MainActivity2 extends AppCompatActivity {
     }
 
     private boolean checkDiagonalsForWin() {
-        if (buttons[0][0].getText().equals(buttons[1][1].getText()) &&
-                buttons[0][0].getText().equals(buttons[2][2].getText()) &&
-                !buttons[0][0].getText().toString().isEmpty()) {
+        if (!buttons[0][0].getText().toString().isEmpty() &&
+                buttons[0][0].getText().equals(buttons[1][1].getText()) &&
+                buttons[0][0].getText().equals(buttons[2][2].getText())) {
             return true;
         }
-        if (buttons[0][2].getText().equals(buttons[1][1].getText()) &&
-                buttons[0][2].getText().equals(buttons[2][0].getText()) &&
-                !buttons[0][2].getText().toString().isEmpty()) {
+        if (!buttons[0][2].getText().toString().isEmpty() &&
+                buttons[0][2].getText().equals(buttons[1][1].getText()) &&
+                buttons[0][2].getText().equals(buttons[2][0].getText())) {
             return true;
         }
         return false;
@@ -137,20 +137,17 @@ public class MainActivity2 extends AppCompatActivity {
 
 
 
+
     private void endGame() {
-        String result = "";
-        if(checkForDraw()){
-            result = "It's a draw!";
-        }else{
-            if (checkForWin()) {
-                if (!isPlayer1Turn) {
-                    result = player1Name + " wins!";
-                } else {
-                    result = player2Name + " wins!";
-                }
+        String result;
+        if (checkForWin()) {
+            if (isPlayer1Turn) {
+                result = player2Name + " wins!";
             } else {
-                result = "It's a draw!";
+                result = player1Name + " wins!";
             }
+        } else {
+            result = "It's a draw!";
         }
 
         Intent intent = new Intent(MainActivity2.this, MainActivity3.class);
@@ -158,6 +155,7 @@ public class MainActivity2 extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
 }
 
 

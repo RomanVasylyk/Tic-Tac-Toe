@@ -28,7 +28,6 @@ public class MainActivity3 extends AppCompatActivity {
             public void onClick(View v) {
                 Intent restartIntent = new Intent(MainActivity3.this, MainActivity.class);
                 startActivity(restartIntent);
-                finish();
             }
         });
     }
